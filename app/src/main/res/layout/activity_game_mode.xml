@@ -4,50 +4,66 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".StartActivity">
+    tools:context=".GameModeActivity">
 
-    <Button
-        android:id="@+id/btTrain"
-        android:layout_width="228dp"
-        android:layout_height="60dp"
-        android:layout_marginTop="50dp"
-        android:text="Train"
-        android:textSize="18sp"
+    <TextView
+        android:id="@+id/textViewChooseYourGameMode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Choose your game mode!"
+        android:textSize="24sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/btOptions"
+        android:id="@+id/btStandard"
         android:layout_width="228dp"
         android:layout_height="60dp"
         android:layout_marginTop="20dp"
-        android:text="Options"
+        android:text="osu!"
+        android:textAllCaps="false"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btTrain" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewChooseYourGameMode" />
 
     <Button
-        android:id="@+id/btAbout"
+        android:id="@+id/btMania"
         android:layout_width="228dp"
         android:layout_height="60dp"
         android:layout_marginTop="20dp"
-        android:text="About"
+        android:text="osu!mania"
+        android:textAllCaps="false"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btOptions" />
+        app:layout_constraintTop_toBottomOf="@+id/btStandard" />
 
     <Button
-        android:id="@+id/btExit"
+        android:id="@+id/btTaiko"
         android:layout_width="228dp"
         android:layout_height="60dp"
         android:layout_marginTop="20dp"
-        android:text="Exit"
+        android:text="osu!taiko"
+        android:textAllCaps="false"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btAbout" />
+        app:layout_constraintTop_toBottomOf="@+id/btMania" />
+
+    <Button
+        android:id="@+id/btCtb"
+        android:layout_width="228dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="20dp"
+        android:text="osu!catch"
+        android:textAllCaps="false"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btTaiko" />
 
 </android.support.constraint.ConstraintLayout>

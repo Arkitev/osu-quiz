@@ -4,50 +4,40 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".StartActivity">
+    tools:context=".WhatToTrain">
 
-    <Button
-        android:id="@+id/btTrain"
-        android:layout_width="228dp"
-        android:layout_height="60dp"
-        android:layout_marginTop="50dp"
-        android:text="Train"
-        android:textSize="18sp"
+    <TextView
+        android:id="@+id/textViewChooseWhatYouWantToTrain"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Choose what you want to train!"
+        android:textSize="24sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/btOptions"
+        android:id="@+id/btTracks"
         android:layout_width="228dp"
         android:layout_height="60dp"
         android:layout_marginTop="20dp"
-        android:text="Options"
+        android:text="Tracks"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btTrain" />
+        app:layout_constraintTop_toBottomOf="@id/textViewChooseWhatYouWantToTrain" />
 
     <Button
-        android:id="@+id/btAbout"
+        android:id="@+id/btBackgrounds"
         android:layout_width="228dp"
         android:layout_height="60dp"
         android:layout_marginTop="20dp"
-        android:text="About"
+        android:text="Backgrounds"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btOptions" />
-
-    <Button
-        android:id="@+id/btExit"
-        android:layout_width="228dp"
-        android:layout_height="60dp"
-        android:layout_marginTop="20dp"
-        android:text="Exit"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btAbout" />
+        app:layout_constraintTop_toBottomOf="@id/btTracks" />
 
 </android.support.constraint.ConstraintLayout>
