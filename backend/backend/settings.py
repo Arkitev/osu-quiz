@@ -27,7 +27,7 @@ SECRET_KEY = 'kdlu((ymh&gfydcv@pnatp)#5dz2i@1bsp+3^aqw!*f__58fms'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['osu-quiz-backend.herokuapp.com']
 
 
 # Application definition
