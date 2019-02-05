@@ -135,9 +135,10 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
         android:layout_marginBottom="20dp"
-        android:text="0"
+        android:text="0.0"
         android:textSize="24sp"
         android:textStyle="bold"
+        android:textColor="#bf00ff"
         app:layout_constraintLeft_toRightOf="@id/textViewPoints"
         app:layout_constraintBottom_toBottomOf="parent" />
 

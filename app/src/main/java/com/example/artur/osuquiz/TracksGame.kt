@@ -1,5 +1,6 @@
 package com.example.artur.osuquiz
 
+import android.graphics.Color
 import android.media.MediaPlayer
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
@@ -49,10 +50,6 @@ class TracksGame : AppCompatActivity() {
                 trackUrl = jsonObject.getString("link")
 
                 loadTrack(trackUrl)
-
-                runOnUiThread {
-                    textView.text = trackTitle
-                }
             }
 
             override fun onFailure(call: Call, e: IOException) {
@@ -82,17 +79,18 @@ class TracksGame : AppCompatActivity() {
         }
 
         btCheck.setOnClickListener() {
-            if(txtArtist.getText().toString() == trackArtist)
-                points += 0.5
-            if(txtTitle.getText().toString() == trackTitle)
-                points += 0.5
-
-            textViewPointsValue.text = points.toString()
+            checkArtistAndTitle()
         }
 
         btUnhide.setOnClickListener() {
             txtArtist.setText(trackArtist)
             txtTitle.setText(trackTitle)
+            txtArtist.setTextColor(Color.GRAY)
+            txtTitle.setTextColor(Color.GRAY)
+            txtArtist.setEnabled(false)
+            txtTitle.setEnabled(false)
+            btCheck.setEnabled(false)
+            btUnhide.setEnabled(false)
         }
 
         btNext.setOnClickListener() {
@@ -105,12 +103,16 @@ class TracksGame : AppCompatActivity() {
             trackTitle = jsonObject.getString("title")
             trackUrl = jsonObject.getString("link")
 
-            btPlay.setBackgroundResource(R.drawable.ic_play_arrow_black_24dp)
             loadTrack(trackUrl)
-
-            runOnUiThread {
-                textView.text = trackTitle
-            }
+            btPlay.setBackgroundResource(R.drawable.ic_play_arrow_black_24dp)
+            txtArtist.setText("")
+            txtTitle.setText("")
+            txtArtist.setTextColor(Color.BLACK)
+            txtTitle.setTextColor(Color.BLACK)
+            txtArtist.setEnabled(true)
+            txtTitle.setEnabled(true)
+            btCheck.setEnabled(true)
+            btUnhide.setEnabled(true)
         }
     }
 
@@ -129,6 +131,27 @@ class TracksGame : AppCompatActivity() {
         } else if (gameMode == "osu!catch") {
             randomTrackId = Random().nextInt((12-9)) + 9
         }
+    }
+
+    private fun checkArtistAndTitle() {
+        if(txtArtist.getText().toString() == trackArtist) {
+            txtArtist.setTextColor(Color.GREEN)
+            points += 0.5
+
+        } else
+            txtArtist.setTextColor(Color.RED)
+
+        if(txtTitle.getText().toString() == trackTitle) {
+            txtTitle.setTextColor(Color.GREEN)
+            points += 0.5
+        } else
+            txtTitle.setTextColor(Color.RED)
+
+        txtArtist.setEnabled(false)
+        txtTitle.setEnabled(false)
+        btCheck.setEnabled(false)
+
+        textViewPointsValue.text = points.toString()
     }
 }
 
