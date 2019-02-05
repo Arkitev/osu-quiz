@@ -9,3 +9,10 @@
 /build
 /captures
 .externalNativeBuild
+venv
+db.sqlite3
+backend/static
+/.idea/misc.xml
+/.idea/dataSources.local.xml
+/.idea/dataSources.xml
+/.idea/encodings.xml
