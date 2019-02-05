@@ -4,52 +4,133 @@ import android.media.MediaPlayer
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import kotlinx.android.synthetic.main.activity_tracks_game.*
+import okhttp3.*
+import org.json.JSONArray
+import org.json.JSONObject
+import java.io.IOException
+import java.util.*
 
 class TracksGame : AppCompatActivity() {
 
     val mp = MediaPlayer()
-    var isTrackPlaying: Boolean = false
+    var points: Double = 0.0
+    var randomTrackId: Int = 0
+    var trackArtist: String = "artist"
+    var trackTitle = "title"
+    var trackUrl = "link"
+    lateinit var jsonObject: JSONObject
+    lateinit var jsonArray: JSONArray
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_tracks_game)
 
-        textViewGameMode.text = intent.getStringExtra("GAME_MODE")
-        val trackUrl = "//b.ppy.sh/preview/320118.mp3"
+        val gameMode = intent.getStringExtra("GAME_MODE")
+        textViewGameMode.text = gameMode
 
-        setTrack(trackUrl)
+        setTrackId(gameMode)
+
+
+
+        //łączenie z bazą i pobranie z niej danych
+        val tracksBaseUrl = "http://95.160.241.159:8081/tracks/?format=json"
+        val client = OkHttpClient()
+        val request = Request.Builder().url(tracksBaseUrl).build()
+
+        client.newCall(request).enqueue(object: Callback {
+
+            override fun onResponse(call: Call, response: Response) {
+                val body: String? = response.body()?.string()
+                jsonArray = JSONArray(body)
+                jsonObject = jsonArray.getJSONObject(randomTrackId)
+
+                trackArtist = jsonObject.getString("artist")
+                trackTitle = jsonObject.getString("title")
+                trackUrl = jsonObject.getString("link")
+
+                loadTrack(trackUrl)
+
+                runOnUiThread {
+                    textView.text = trackTitle
+                }
+            }
+
+            override fun onFailure(call: Call, e: IOException) {
+                println("Failed to execute request")
+            }
+        })
+        //
+
+
+
+        mp.setOnCompletionListener {
+            btPlay.setBackgroundResource(R.drawable.ic_play_arrow_black_24dp)
+        }
 
         btPlay.setOnClickListener() {
-            if(!isTrackPlaying) {
-                mp.prepare()
+            if(!mp.isPlaying) {
                 mp.start()
-                isTrackPlaying = true
                 btPlay.setBackgroundResource(R.drawable.ic_pause_black_24dp)
             } else {
                 mp.pause()
-                isTrackPlaying = false
                 btPlay.setBackgroundResource(R.drawable.ic_play_arrow_black_24dp)
             }
         }
 
         btReplay.setOnClickListener() {
-
+            mp.seekTo(0)
         }
 
         btCheck.setOnClickListener() {
+            if(txtArtist.getText().toString() == trackArtist)
+                points += 0.5
+            if(txtTitle.getText().toString() == trackTitle)
+                points += 0.5
 
+            textViewPointsValue.text = points.toString()
         }
 
         btUnhide.setOnClickListener() {
-
+            txtArtist.setText(trackArtist)
+            txtTitle.setText(trackTitle)
         }
 
         btNext.setOnClickListener() {
+            mp.stop()
+            mp.reset()
 
+            setTrackId(gameMode)
+            jsonObject = jsonArray.getJSONObject(randomTrackId)
+            trackArtist = jsonObject.getString("artist")
+            trackTitle = jsonObject.getString("title")
+            trackUrl = jsonObject.getString("link")
+
+            btPlay.setBackgroundResource(R.drawable.ic_play_arrow_black_24dp)
+            loadTrack(trackUrl)
+
+            runOnUiThread {
+                textView.text = trackTitle
+            }
         }
     }
 
-    private fun setTrack(trackUrl: String) {
+    private fun loadTrack(trackUrl: String) {
         mp.setDataSource(trackUrl)
+        mp.prepare()
+    }
+
+    private fun setTrackId(gameMode: String) {
+        if(gameMode == "osu!") {
+            randomTrackId = Random().nextInt((3-0)) + 0
+        } else if (gameMode == "osu!mania") {
+            randomTrackId = Random().nextInt((6-3)) + 3
+        } else if (gameMode == "osu!taiko") {
+            randomTrackId = Random().nextInt((9-6)) + 6
+        } else if (gameMode == "osu!catch") {
+            randomTrackId = Random().nextInt((12-9)) + 9
+        }
     }
 }
+
+
+

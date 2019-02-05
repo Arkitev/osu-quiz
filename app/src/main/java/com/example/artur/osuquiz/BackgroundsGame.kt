@@ -3,9 +3,7 @@ package com.example.artur.osuquiz
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import kotlinx.android.synthetic.main.activity_backgrounds_game.*
-import android.graphics.BitmapFactory
-import java.net.URL
-
+import com.squareup.picasso.Picasso
 
 class BackgroundsGame : AppCompatActivity() {
 
@@ -14,10 +12,9 @@ class BackgroundsGame : AppCompatActivity() {
         setContentView(R.layout.activity_backgrounds_game)
 
         textViewGameMode.text = intent.getStringExtra("GAME_MODE")
+        val backgroundUrl = "https://b.ppy.sh/thumb/320118l.jpg"
 
-        val url = URL("https://b.ppy.sh/thumb/320118l.jpg")
-        val bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream())
-        imgBackground.setImageBitmap(bmp)
+        loadImage(backgroundUrl)
 
         btCheck.setOnClickListener() {
 
@@ -30,5 +27,9 @@ class BackgroundsGame : AppCompatActivity() {
         btNext.setOnClickListener() {
 
         }
+    }
+
+    private fun loadImage(backgroundUrl: String) {
+        Picasso.with(this).load(backgroundUrl).into(imgBackground)
     }
 }

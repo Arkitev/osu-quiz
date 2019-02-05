@@ -19,7 +19,6 @@ class StartActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_start)
 
-        setupPermissions()
 
         btTrain.setOnClickListener() {
             val myIntent = Intent(this, GameModeActivity::class.java)
@@ -38,35 +37,6 @@ class StartActivity : AppCompatActivity() {
             moveTaskToBack(true)
             android.os.Process.killProcess(android.os.Process.myPid())
             System.exit(1)
-        }
-    }
-
-    private fun setupPermissions() {
-        val permission = ContextCompat.checkSelfPermission(this,
-                Manifest.permission.INTERNET)
-
-        if (permission != PackageManager.PERMISSION_GRANTED) {
-            Log.i(TAG, "Permission denied.")
-            makeRequest()
-        }
-    }
-
-    private fun makeRequest() {
-        ActivityCompat.requestPermissions(this,
-                arrayOf(Manifest.permission.INTERNET),
-                REQUEST_CODE)
-    }
-
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
-        when (requestCode) {
-            REQUEST_CODE -> {
-                if (grantResults.isEmpty() || grantResults[0] != PackageManager.PERMISSION_GRANTED) {
-                    Log.i(TAG, "Permission has been denied by user.")
-                    finish()
-                } else {
-                    Log.i(TAG, "Permission has been granted by user.")
-                }
-            }
         }
     }
 }
