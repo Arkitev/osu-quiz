@@ -20,14 +20,19 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".GameModeActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".WhatToTrain"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".BackgroundsGame"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".TracksGame"
-            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".GameModeActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".WhatToTrain"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".BackgroundsGame"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".TracksGame"
+            android:screenOrientation="portrait" />
+        <activity android:name=".AboutActivity"></activity>
     </application>
 
 </manifest>
